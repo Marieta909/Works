@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+  <p id="444"></p>
+  <div id="table"></div>
+
+  <script>
+
+    function createTable(n, k) {
+
+      let a = 0;
+      let arr = httpGet(`http://localhost:8080/?height=${n}&width=${k}`)
+      let table = "<table border='10' width = 800px height = 800px align='center'>"
+      for (let i = 0; i < n; i++) {
+        table += "<tr>"
+        for (let j = 0; j < k; j++) {
+
+          if (arr[a] == 0 || arr[a] == 1 || arr[a] == 2) {
+
+            table += "<td align='center' colspan='1' style=background-color:Red> </td> "
+          }
+          if (arr[a] == 3 || arr[a] == 4 || arr[a] == 5) {
+            table += "<td align='center' colspan='1' style=background-color:Green> </td> "
+          }
+          if (arr[a] == 6) {
+            table += "<td align='center' colspan='1' style=background-color:DodgerBlue> </td> "
+
+          }
+          a++;
+
+        }
+
+        table += "</tr>"
+      }
+      table += "</table>"
+      
+      return table
+
+    }
+    const board = createTable(6, 10)
+    document.getElementById("table").innerHTML=board
+
+    function httpGet(theUrl) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", theUrl, false); // false for synchronous request
+      xmlHttp.send(null);
+      return JSON.parse(xmlHttp.responseText);
+    }
+  </script>
+
+</body>
+
+</html>
