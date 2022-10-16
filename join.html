@@ -3,7 +3,9 @@
 
 <body>
 
-  <p id="444"></p>
+  <input id="height" type="number" placeholder="height">
+  <input id="width" type="number" placeholder="width">
+  <button id="btn">Create</button>
   <div id="table"></div>
 
   <script>
@@ -39,9 +41,16 @@
       return table
 
     }
-    const board = createTable(6, 10)
-    document.getElementById("table").innerHTML=board
+   
+    document.getElementById("btn").addEventListener("click", btnEvent)
 
+        function btnEvent() {
+            let height = document.getElementById('height').value * 1
+            let width = document.getElementById('width').value * 1
+            const board = createTable(height, width)
+            document.getElementById("table").innerHTML = board
+        }
+    
     function httpGet(theUrl) {
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open("GET", theUrl, false); // false for synchronous request
